@@ -45,11 +45,9 @@ int main()
 		{
 			cin >> woodWH[i][0] >> woodWH[i][1]; //given Width and Height
 		}
-		//////////sort by the area of each rectangle//////////
-		//the bigger one must be below
-		//the smaller one is not necessarily on top
-		//sort from the smallest one to the biggest//
 		
+		//////////sort by the area of each rectangle//////////
+		//sort from the smallest one to the biggest//
 		int *pa[n]; 
    	 	for(i=0; i<n; i++)
    	 	{
@@ -69,7 +67,22 @@ int main()
        	cout << endl;
     	}
     	
+    	//////////compare each area of rectangle//////////	
+		int temp = 1;//cuz it aleast 1 wood would be stacked
+    	int sum = 0;
+   	   	int area[n];
+    	for(i=0; i<n; i++)	area[i] = woodWH[i][0] * woodWH[i][1];
     	
+    	for(i=1; i<n; i++)
+    	{
+    		//the bigger one must be below
+    		if(area[i] >= area[i-1]) temp++;
+			//the smaller one is not necessarily on top
+			if(woodWH[i][0] < woodWH[i-1][0] || woodWH[i][1] < woodWH[i-1][1]) temp--;
+			if(temp >= 0) sum = temp;
+			temp = 1;	
+		} 
+  
     		 
 		//////////reset value//////////
 		woodWH[n][2] = 0;
